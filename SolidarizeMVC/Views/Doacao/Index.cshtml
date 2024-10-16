@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DoacaoModel>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Doações</h1>
+        <a class="btn btn-success mx-2">Cadastrar nova doação</a>
+    </div>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">DoadorId</th>
+            <th scope="col">Doador</th>
+            <th scope="col">CampanhaId</th>
+            <th scope="col">Campanha</th>
+            <th scope="col">ValorDoacao</th>
+            <th scope="col">DataDoacao</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var campanha in Model)
+            {
+                <tr>
+                    <th scope="row">@campanha.Id</th>
+                    <td>@campanha.DoadorId</td>
+                    <td>@campanha.Doador.Nome</td>
+                    <td>@campanha.CampanhaId</td>
+                    <td>@campanha.Campanha.Nome</td>
+                    <td>@campanha.ValorDoacao</td>
+                    <td>@campanha.DataDoacao</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

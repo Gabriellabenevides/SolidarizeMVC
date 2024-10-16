@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SolidarizeMVC.Models.DoadorModel>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Doadores</h1>
+        <a class="btn btn-success mx-2">Cadastrar novo doador</a>
+    </div>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Email</th>
+            <th scope="col">Doações (IDs)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doador in Model)
+        {
+            <tr>
+                <th scope="row">@doador.Id</th>
+                <td>@doador.Nome</td>
+                <td>@doador.CPF</td>
+                <td>@doador.Email</td>
+                <td>
+                    @if (doador.Doacoes != null && doador.Doacoes.Any())
+                    {
+                        <ul>
+                            @foreach (var doacao in doador.Doacoes)
+                            {
+                                <li>@doacao.Id</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>Sem doações</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
