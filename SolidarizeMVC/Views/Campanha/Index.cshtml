@@ -4,10 +4,24 @@
 
     <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>Campanhas</h1>
-        <a class="btn btn-success mx-2" asp-controller="Campanha" asp-action="Cadastrar">Cadastrar nova campanha</a>
+        <a class="btn btn-success mx-2" asp-controller="Campanha" asp-action="Cadastrar"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova campanha</a>
     </div>
 
-<table class="table table-dark table-hover">
+    @if(TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-sucess text-light" role="alert">
+            @TempData["MensagemSucesso"]
+            </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger text-light" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+<table id="Campanhas" class="table table-light table-hover mt-5">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -15,7 +29,9 @@
             <th scope="col">Valor Objetivo</th>
             <th scope="col">Data Início</th>
             <th scope="col">Data Final</th>
+            <th scope="col">Status</th>
             <th scope="col">Doações (IDs)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +43,7 @@
                 <td>@campanha.ValorObjetivo</td>
                 <td>@campanha.DataInicio.ToShortDateString()</td>
                 <td>@campanha.DataFinal.ToShortDateString()</td>
+                <td>@campanha.Status</td>
                 <td>
                     @if (campanha.Doacoes != null && campanha.Doacoes.Any())
                     {
@@ -41,6 +58,10 @@
                     {
                         <span>Sem doações</span>
                     }
+                </td>
+                <td>
+                        <a asp-controller="Campanha" asp-action="Editar" asp-route-id="@campanha.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> editar</a>
+                        <a asp-controller="Campanha" asp-action="Excluir" asp-route-id="@campanha.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3-fill"></i> excluir</a>
                 </td>
             </tr>
         }

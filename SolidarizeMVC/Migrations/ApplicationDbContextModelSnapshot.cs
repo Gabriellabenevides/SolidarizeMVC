@@ -8,7 +8,7 @@ using SolidarizeMVC.Data;
 
 #nullable disable
 
-namespace SolidarizeMVC.Migrations
+namespace Solidarize.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -35,10 +35,6 @@ namespace SolidarizeMVC.Migrations
 
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

@@ -9,11 +9,11 @@ using SolidarizeMVC.Data;
 
 #nullable disable
 
-namespace SolidarizeMVC.Migrations
+namespace Solidarize.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241015001958_CriandoTabelas")]
-    partial class CriandoTabelas
+    [Migration("20241019025354_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,10 +38,6 @@ namespace SolidarizeMVC.Migrations
 
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

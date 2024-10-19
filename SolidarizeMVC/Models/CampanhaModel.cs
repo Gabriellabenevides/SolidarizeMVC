@@ -8,8 +8,7 @@ namespace SolidarizeMVC.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Digite o nome da Campanha!")]
         public string Nome { get; set; }
-        [Required(ErrorMessage = "Digite a descrição da Campanha!")]
-        public string Descricao { get; set; }
+
         [Required(ErrorMessage = "Digite o Valor Objetivo!")]
         public decimal ValorObjetivo { get; set; }
         [Required(ErrorMessage = "Digite a Data de início!")]

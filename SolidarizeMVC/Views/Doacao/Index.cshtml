@@ -3,11 +3,25 @@
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <h1>Doações</h1>
-        <a class="btn btn-success mx-2">Cadastrar nova doação</a>
+        <h1>Doação</h1>
+        <a class="btn btn-success mx-2" asp-controller="Doacao" asp-action="Cadastrar"><i class="bi bi-cash-coin mx-2"></i>Cadastrar nova doacao</a>
     </div>
 
-<table class="table table-dark table-hover">
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-sucess text-light" role="alert">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger text-light" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <table id="Doacoes" class="table table-light table-hover mt-5">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -17,22 +31,27 @@
             <th scope="col">Campanha</th>
             <th scope="col">ValorDoacao</th>
             <th scope="col">DataDoacao</th>
+                <th></th>
         </tr>
     </thead>
     <tbody>
 
         @if (Model != null)
         {
-            @foreach (var campanha in Model)
+            @foreach (var doacao in Model)
             {
                 <tr>
-                    <th scope="row">@campanha.Id</th>
-                    <td>@campanha.DoadorId</td>
-                    <td>@campanha.Doador.Nome</td>
-                    <td>@campanha.CampanhaId</td>
-                    <td>@campanha.Campanha.Nome</td>
-                    <td>@campanha.ValorDoacao</td>
-                    <td>@campanha.DataDoacao</td>
+                    <th scope="row">@doacao.Id</th>
+                    <td>@doacao.DoadorId</td>
+                        <td>@doacao.Doador.Nome</td>
+                        <td>@doacao.CampanhaId</td>
+                        <td>@doacao.Campanha.Nome</td>
+                        <td>@doacao.ValorDoacao</td>
+                        <td>@doacao.DataDoacao</td>
+                        <td>
+                            <a asp-controller="Doacao" asp-action="Editar" asp-route-id="@doacao.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> editar</a>
+                            <a asp-controller="Doacao" asp-action="Excluir" asp-route-id="@doacao.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3-fill"></i> excluir</a>
+                        </td>
                 </tr>
             }
         }

@@ -4,10 +4,24 @@
 
     <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>Doadores</h1>
-        <a class="btn btn-success mx-2">Cadastrar novo doador</a>
+        <a class="btn btn-success mx-2" asp-controller="Doador" asp-action="Cadastrar"><i class="bi bi-person-plus m-2"></i>Cadastrar novo doador</a>
     </div>
 
-<table class="table table-dark table-hover">
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-sucess text-light" role="alert">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger text-light" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <table id="Doadores" class="table table-light table-hover mt-5">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -15,6 +29,7 @@
             <th scope="col">CPF</th>
             <th scope="col">Email</th>
             <th scope="col">Doações (IDs)</th>
+                <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +55,10 @@
                         <span>Sem doações</span>
                     }
                 </td>
+                    <td>
+                        <a asp-controller="Doador" asp-action="Editar" asp-route-id="@doador.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> editar</a>
+                        <a asp-controller="Doador" asp-action="Excluir" asp-route-id="@doador.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3-fill"></i> excluir</a>
+                    </td>
             </tr>
         }
     </tbody>

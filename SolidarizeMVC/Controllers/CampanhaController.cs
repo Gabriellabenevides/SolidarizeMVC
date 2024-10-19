@@ -10,12 +10,12 @@ namespace SolidarizeMVC.Controllers
         readonly private ApplicationDbContext _db;
         public CampanhaController(ApplicationDbContext db)
         {
-                _db = db;
+            _db = db;
         }
         public IActionResult Index()
         {
             IEnumerable<CampanhaModel> campanhas = _db.Campanhas
-                .Include(c => c.Doacoes) 
+                .Include(c => c.Doacoes)
                 .ToList();
 
             return View(campanhas);
@@ -23,8 +23,25 @@ namespace SolidarizeMVC.Controllers
 
         [HttpGet]
         public IActionResult Cadastrar()
-        { 
-            return View(); 
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Editar(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            CampanhaModel campanha = _db.Campanhas.FirstOrDefault(x => x.Id == id);
+
+            if (campanha == null)
+            {
+                return NotFound();
+            }
+            return View(campanha);
         }
 
         [HttpPost]
@@ -35,9 +52,60 @@ namespace SolidarizeMVC.Controllers
                 _db.Campanhas.Add(campanhas);
                 _db.SaveChanges();
 
+                TempData["MensagemSucesso"] = "Cadastro realizado com sucesso!";
+
                 return RedirectToAction("Index");
-            } 
+            }
+
+            TempData["MensagemErro"] = "Algum erro ocorreu ao realizar o cadastro!";
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Editar(CampanhaModel campanha)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Campanhas.Update(campanha);
+                _db.SaveChanges();
+
+                TempData["MensagemSucesso"] = "Cadastro editado com sucesso!";
+
+                return RedirectToAction("Index");
+            }
+            return View(campanha);
+        }
+        [HttpGet]
+        public IActionResult Excluir(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            CampanhaModel campanha = _db.Campanhas.FirstOrDefault(x => x.Id == id);
+
+            if (campanha == null)
+            {
+                return NotFound();
+            }
+            return View(campanha);
+        }
+
+        [HttpPost]
+        public IActionResult Excluir(CampanhaModel campanha)
+        {
+            if(campanha == null)
+            {
+                return NotFound();
+            }
+
+            TempData["MensagemSucesso"] = "Cadastro excluido com sucesso!";
+
+            _db.Campanhas.Remove(campanha);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

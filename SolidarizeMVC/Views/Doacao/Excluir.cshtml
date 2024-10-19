@@ -1,36 +1,39 @@
 ﻿@model DoacaoModel
 @{
-    ViewData["title"] = "Cadastrar Doação";
+    ViewData["title"] = "Excluir Doação";
 }
 
 <div class="container bg-dark p-5 rounded-5">
 
     <div class="mb-5 text-center">
-        <h1 class="text-light">Cadastro de Doações</h1>
+        <h1 class="text-light">Excluir Doação</h1>
     </div>
 
-    <form method="post" asp-controller="Doacao" asp-action="Cadastrar">
+    <form method="post" asp-controller="Doacao" asp-action="Excluir">
+        <input type="hidden" asp-for="Id" />
+
+        <h2 class ="text-light">Tem certeza que deseja excluir o registro abaixo?</h2>
 
         <div class="mb-3">
             <label for="DoadorId" class="form-label text-light">ID do Doador</label>
-            <input type="number" class="form-control text-light" asp-for="DoadorId" id="doadorId" placeholder="Digite o ID do doador">
+            <input type="number" class="form-control" asp-for="DoadorId" id="doadorId" placeholder="Digite o ID do doador" disabled>
             <span class="text-danger" asp-validation-for="DoadorId"></span>
         </div>
 
         <div class="mb-3">
             <label for="CampanhaId" class="form-label text-light">ID da Campanha</label>
-            <input type="number" class="form-control text-light" asp-for="CampanhaId" id="campanhaId" placeholder="Digite o ID da campanha">
+            <input type="number" class="form-control" asp-for="CampanhaId" id="campanhaId" placeholder="Digite o ID da campanha" disabled>
             <span class="text-danger" asp-validation-for="CampanhaId"></span>
         </div>
 
         <div class="mb-3">
             <label for="ValorDoacao" class="form-label text-light">Valor da Doação:</label>
-            <input type="number" class="form-control text-light" asp-for="ValorDoacao" id="valorDoacao" placeholder="Ex: 100.00">
+            <input type="number" class="form-control" asp-for="ValorDoacao" id="valorDoacao" placeholder="Ex: 100.00" disabled>
             <span class="text-danger" asp-validation-for="ValorDoacao"></span>
         </div>
 
         <div class="d-flex gap-5 mt-5">
-            <button type="submit" class="btn btn-success w-50">Adicionar Doacao</button>
+            <button type="submit" class="btn btn-danger w-50">Excluir Doação</button>
             <a class="btn btn-primary w-50" asp-controller="Doacao" asp-action="Index">Voltar</a>
         </div>
     </form>
